@@ -82,6 +82,11 @@ The real-time monitoring channels (`/api/v1/ws/sessions/{id}/monitor` and `/api/
 3. Within 5 seconds of opening, the client sends `{"action": "AUTH", "ticket": "<ticket>"}`.
 4. On unexpected disconnect, the client uses exponential backoff and **always obtains a fresh ticket** before reconnecting (consumed tickets are never reused).
 
+## Safe Browsing During Assessments
+
+The student attempt page includes a separate feature module in `src/features/safe-browsing/`. While an attempt is in progress, it monitors browser focus and document visibility. The first two detected departures show warnings; the third triggers the existing attempt submission flow, including its pending-response save.
+
+This is best-effort deterrence only: a web page cannot prevent a student from switching tabs, opening another app, or otherwise leaving the browser. Focus loss can also have benign causes. Violation counts are held in page memory and are not sent to or persisted by the backend, so this is not tamper-proof proctoring or a server-enforced exam policy.
 
 ---
 

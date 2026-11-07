@@ -11,7 +11,7 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent, act } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 
@@ -597,6 +597,52 @@ describe('StudentAttemptPage', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/OS scheduling algorithm/i)).toBeInTheDocument();
+    });
+  });
+
+  it('displays the safe browsing status while an attempt is in progress', async () => {
+    renderWithRouter(
+      <StudentAttemptPage />,
+      '/student/attempts/att-1',
+      '/student/attempts/:attemptId'
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/Safe browsing is active/i)).toBeInTheDocument();
+      expect(screen.getByText(/0 of 2 warnings used/i)).toBeInTheDocument();
+    });
+  });
+
+  it('submits the attempt on the third detected focus loss', async () => {
+    (studentApi.submitAttempt as ReturnType<typeof vi.fn>).mockResolvedValue(sampleFinalizedAttempt);
+    renderWithRouter(
+      <StudentAttemptPage />,
+      '/student/attempts/att-1',
+      '/student/attempts/:attemptId'
+    );
+
+    await waitFor(() => expect(screen.getByText(/OS scheduling algorithm/i)).toBeInTheDocument());
+
+    act(() => {
+      window.dispatchEvent(new Event('blur'));
+      window.dispatchEvent(new Event('focus'));
+      window.dispatchEvent(new Event('blur'));
+      window.dispatchEvent(new Event('focus'));
+    });
+
+    expect(screen.getByText(/2 of 2 warnings used/i)).toBeInTheDocument();
+    expect(studentApi.submitAttempt).not.toHaveBeenCalled();
+
+    act(() => {
+      window.dispatchEvent(new Event('blur'));
+    });
+
+    await waitFor(() => {
+      expect(studentApi.submitAttempt).toHaveBeenCalledWith('att-1');
+      expect(mockShowToast).toHaveBeenCalledWith(
+        expect.stringContaining('Too many tab switches'),
+        'warning'
+      );
     });
   });
 
