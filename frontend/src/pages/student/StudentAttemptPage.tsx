@@ -14,6 +14,11 @@ import { Spinner } from '../../components/common/Spinner';
 import { Badge } from '../../components/common/Badge';
 import { Modal } from '../../components/common/Modal';
 import { ErrorDisplay } from '../../components/common/ErrorDisplay';
+import { SafeBrowsingStatus } from '../../features/safe-browsing/SafeBrowsingStatus';
+import {
+  SAFE_BROWSING_WARNING_LIMIT,
+  useSafeBrowsing,
+} from '../../features/safe-browsing/useSafeBrowsing';
 import {
   Clock,
   CheckCircle2,
@@ -223,9 +228,9 @@ export const StudentAttemptPage: React.FC = () => {
   // Auto-expire when timer hits 0
   const handleAutoExpire = async () => {
     if (!attemptId || isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     await flushPendingSaves();
-    isSubmittingRef.current = true;
     showToast('Time has expired! Submitting your attempt...', 'info');
     try {
       await studentApi.submitAttempt(attemptId);
@@ -351,9 +356,9 @@ export const StudentAttemptPage: React.FC = () => {
   // 4. Final Submission
   const handleFinalSubmit = async () => {
     if (!attemptId || isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     await flushPendingSaves();
-    isSubmittingRef.current = true;
     try {
       await studentApi.submitAttempt(attemptId);
       showToast('Assessment submitted successfully!', 'success');
@@ -370,6 +375,24 @@ export const StudentAttemptPage: React.FC = () => {
       setIsSubmitModalOpen(false);
     }
   };
+
+  const handleSafeBrowsingViolation = useCallback((violationCount: number) => {
+    if (violationCount <= SAFE_BROWSING_WARNING_LIMIT) {
+      showToast(
+        `Safe browsing warning ${violationCount} of ${SAFE_BROWSING_WARNING_LIMIT}. Please stay on the test page.`,
+        'warning'
+      );
+      return;
+    }
+
+    showToast('Too many tab switches detected. Submitting your assessment...', 'warning');
+    void handleFinalSubmit();
+  }, [handleFinalSubmit, showToast]);
+
+  const { violationCount } = useSafeBrowsing({
+    enabled: Boolean(attempt && attempt.status === 'IN_PROGRESS' && !isSubmitting),
+    onViolation: handleSafeBrowsingViolation,
+  });
 
   if (isLoading) {
     return (
@@ -411,6 +434,8 @@ export const StudentAttemptPage: React.FC = () => {
 
   return (
     <div className="space-y-4 max-w-5xl mx-auto">
+      <SafeBrowsingStatus violationCount={violationCount} />
+
       {/* Top Fixed Progress & Timer Bar */}
       <Card className="p-4 bg-white shadow-sm border-gray-200 sticky top-16 z-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
