@@ -73,65 +73,25 @@ The system serves three primary institutional personas:
 ![User Login Interface](docs/screenshots/01-auth-login.png)
 *Caption: Authentication portal supporting email and password login with Argon2 credential verification.*
 
-### Multi-Role Selection
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture the /select-role page for a user holding multiple roles -->
-![Role Selection Screen](docs/screenshots/02-auth-role-selection.png)
-*Caption: Role switcher displayed when an authenticated user holds multiple institutional roles.*
-
 ### Institutional Administration Overview
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture the /admin dashboard showing statistics and navigation tabs -->
 ![Admin Dashboard Overview](docs/screenshots/03-admin-dashboard.png)
 *Caption: Administrator control center displaying college statistics, academic structures, and membership directories.*
-
-### Academic Structure Management
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /admin/classes or /admin/departments with data table -->
-![Academic Structure Setup](docs/screenshots/04-admin-structure.png)
-*Caption: Institutional management panel for configuring departments, branches, classes, and subjects.*
-
-### Faculty Question Bank Authoring
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /faculty/questions showing question list and creation modal -->
-![Faculty Question Bank](docs/screenshots/05-faculty-question-bank.png)
-*Caption: Question bank interface for authoring MCQ, True/False, and Multiple-Select questions.*
 
 ### Faculty Quiz Builder and Publishing
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /faculty/quizzes/build showing question ordering and marks -->
 ![Quiz Assembly and Publishing](docs/screenshots/06-faculty-quiz-builder.png)
 *Caption: Interactive quiz builder with question reordering, score weight overrides, and atomic publishing.*
 
-### Faculty Real-Time Session Monitor
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /faculty/sessions/:id/monitor with live student cards -->
-![Live Session Monitor](docs/screenshots/07-faculty-session-monitor.png)
-*Caption: WebSocket-powered live monitor showing real-time student connectivity, answered counts, and progress status.*
-
-### Student Assessment Dashboard
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /student dashboard with available quizzes and join code modal -->
-![Student Assessment Portal](docs/screenshots/08-student-dashboard.png)
-*Caption: Student assessment portal displaying scheduled, active, and completed exams.*
-
 ### Student Session Lobby
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /student/sessions/:id/lobby waiting for teacher trigger -->
 ![Student Session Lobby](docs/screenshots/09-student-session-lobby.png)
 *Caption: Pre-exam waiting room synchronizing session start state via real-time WebSocket connection.*
 
-### Student Attempt Workspace
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /student/attempts/:id with question palette and countdown timer -->
-![Student Examination Workspace](docs/screenshots/10-student-attempt-workspace.png)
-*Caption: Active examination screen with server-authoritative timer, question palette, and autosave indicators.*
-
-### Student Score and Detailed Results
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /student/attempts/:id/result showing breakdown and explanations -->
-![Student Examination Results](docs/screenshots/11-student-results-breakdown.png)
-*Caption: Post-release performance view showing awarded marks, correct answers, and instructor explanations.*
-
 ### Responsive Mobile Interface
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture responsive mobile viewport of student attempt or login -->
 ![Mobile Examination View](docs/screenshots/12-mobile-responsive-view.png)
 *Caption: Adaptive responsive layout optimized for mobile tablets and smaller touch displays.*
-
-### System Health and Diagnostic Endpoints
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture terminal curl or browser JSON output of /health/ready -->
-![Health Check API Response](docs/screenshots/13-health-diagnostics.png)
-*Caption: Backend liveness and database connection readiness diagnostic output.*
 
 ---
 
