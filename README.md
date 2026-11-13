@@ -70,28 +70,24 @@ The system serves three primary institutional personas:
 
 ### User Authentication
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture the login interface at /login with credentials form -->
-![User Login Interface](docs/screenshots/01-auth-login.png)
+![User Login Interface](docs/Screenshots/01-auth-login.png)
 *Caption: Authentication portal supporting email and password login with Argon2 credential verification.*
 
 ### Institutional Administration Overview
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture the /admin dashboard showing statistics and navigation tabs -->
-![Admin Dashboard Overview](docs/screenshots/03-admin-dashboard.png)
+![Admin Dashboard Overview](docs/Screenshots/03-admin-dashboard.png)
 *Caption: Administrator control center displaying college statistics, academic structures, and membership directories.*
 
 ### Faculty Quiz Builder and Publishing
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /faculty/quizzes/build showing question ordering and marks -->
-![Quiz Assembly and Publishing](docs/screenshots/06-faculty-quiz-builder.png)
+![Quiz Assembly and Publishing](docs/Screenshots/06-faculty-quiz-builder.png)
 *Caption: Interactive quiz builder with question reordering, score weight overrides, and atomic publishing.*
 
 ### Student Session Lobby
 <!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture /student/sessions/:id/lobby waiting for teacher trigger -->
-![Student Session Lobby](docs/screenshots/09-student-session-lobby.png)
+![Student Session Lobby](docs/Screenshots/09-student-session-lobby.png)
 *Caption: Pre-exam waiting room synchronizing session start state via real-time WebSocket connection.*
 
-### Responsive Mobile Interface
-<!-- SCREENSHOT: Replace the path below with your image. Suggested: Capture responsive mobile viewport of student attempt or login -->
-![Mobile Examination View](docs/screenshots/12-mobile-responsive-view.png)
-*Caption: Adaptive responsive layout optimized for mobile tablets and smaller touch displays.*
 
 ---
 
